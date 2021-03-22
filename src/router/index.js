@@ -4,7 +4,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import tableData from '../views/tableData.vue';
-import timePicker from '../views/timePicker.vue';
+import dateTimePicker from '../views/dateTimePicker.vue';
 import datePicker from '../views/datePicker.vue';
 // 2.注入插件
 Vue.use(VueRouter);
@@ -17,9 +17,9 @@ const routes = [
     component: tableData,
   },
   {
-    path: '/time',
-    name: 'timePicker',
-    component: timePicker,
+    path: '/datetime',
+    name: 'dateTimePicker',
+    component: dateTimePicker,
   },
   {
     path: '/date',

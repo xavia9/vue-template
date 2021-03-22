@@ -4,7 +4,7 @@
     <router-link to="/table">表格组件</router-link>
     <br />
     <br />
-    <router-link to="/time">时间组件</router-link>
+    <router-link to="/datetime">时间组件</router-link>
     <br />
     <br />
     <router-link to="/date">日期组件</router-link>

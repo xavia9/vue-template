@@ -1,29 +1,25 @@
 <template>
   <div>
-    <DatePicker @datetimeselected="handleTime"></DatePicker>
+    时间组件
+    <DatePicker
+      @changeDateTime="changeEventStartTime"
+      :dateTime="eventStartTime"
+      ref="eventStartTime"
+    ></DatePicker>
   </div>
 </template>
 <script>
-import DatePicker from "../components/DatePicker";
+import DatePicker from "../components/DatePicker.vue";
+
 export default {
-  name: "datePicker",
+  name: "timePicker",
   components: { DatePicker },
   data() {
-    return {
-      start_date: "",
-      end_date: "",
-    };
+    return { eventStartTime: null };
   },
   methods: {
-    handleTime(val) {
-      console.log(val);
-      if (val) {
-        this.start_date = val[0]; //选择后返回的开始时间
-        this.end_date = val[1]; //选择后返回的结束时间
-      } else {
-        end_date = "";
-        end_date = "";
-      }
+    changeEventStartTime(val) {
+      this.eventStartTime = val;
     },
   },
 };

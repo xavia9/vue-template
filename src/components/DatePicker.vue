@@ -1,71 +1,86 @@
 <template>
   <div>
     <el-date-picker
-      v-model="dateRange"
-      type="datetimerange"
+      v-model="time"
+      type="datetime"
+      placeholder="选择日期时间"
       align="right"
-      unlink-panels
-      range-separator="至"
-      start-placeholder="开始时间"
-      end-placeholder="结束时间"
       :picker-options="pickerOptions"
-      value-format="yyyy-MM-dd HH:mm:ss"
-      :default-time="['08:00:00', '12:00:00']"
-      @change="setDate"
+      @change="changeTime"
     >
     </el-date-picker>
   </div>
 </template>
 <script>
 export default {
-  name: "DatePicker",
-  props: {
-    start_date: {
-      type: String,
-      default: "",
-    },
-    end_date: {
-      type: String,
-      default: "",
-    },
-    index: {
-      type: Number,
-      require: true,
-    },
-  },
-  mounted() {
-    this.dateRange = [this.start_date, this.end_date];
-  },
-  data: function () {
+  name: "PublicTimePicker",
+  data() {
     return {
-      dateRange: [],
+      time: this.$attrs.dateTime || "",
       pickerOptions: {
         shortcuts: [
           {
-            text: "最近一周",
+            text: "今天",
             onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit("pick", [start, end]);
+              const date = new Date();
+              // const dataTwo = new Date(data.toLocaleDateString());
+              // dataTwo.setTime(dataTwo.getTime());
+              picker.$emit("pick", date.getTime());
             },
           },
           {
-            text: "最近一个月",
+            text: "昨天",
             onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-              picker.$emit("pick", [start, end]);
+              const date = new Date();
+              // picker.$emit("pick", date.removeDays(1));
+              date.setTime(date.getTime() - 3600 * 1000 * 24);
+              picker.$emit("pick", date);
             },
           },
           {
-            text: "最近三个月",
+            text: "2天前",
             onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-              picker.$emit("pick", [start, end]);
+              const date = new Date();
+              // picker.$emit("pick", date.removeDays(1));
+              date.setTime(date.getTime() - 3600 * 1000 * 24 * 2);
+              picker.$emit("pick", date);
+            },
+          },
+          {
+            text: "一周前",
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit("pick", date);
+            },
+          },
+          {
+            text: "一个月前",
+            onClick(picker) {
+              const date = new Date();
+              date.setTime(date.getTime() - 3600 * 1000 * 24 * 30);
+              picker.$emit("pick", date);
+            },
+          },
+          {
+            text: "三个月前",
+            onClick(picker) {
+              const date = new Date();
+              picker.$emit("pick", date.removeMonths(3));
+            },
+          },
+          {
+            text: "半年前",
+            onClick(picker) {
+              const date = new Date();
+              picker.$emit("pick", date.removeMonths(6));
+            },
+          },
+          {
+            text: "一年前",
+            onClick(picker) {
+              const date = new Date();
+              picker.$emit("pick", date.removeYears(1));
             },
           },
         ],
@@ -73,12 +88,10 @@ export default {
     };
   },
   methods: {
-    setDate(val) {
-      var selectedtime = {};
-      selectedtime.datetime = val;
-      selectedtime.index = this.index;
-      console.log(selectedtime);
-      this.$emit("datetimeselected", selectedtime);
+    changeTime(val) {
+      console.log(12);
+      var oval = this.moment(val).format("YYYY-MM-DD HH:mm:ss");
+      this.$emit("changeDateTime", oval);
     },
   },
 };

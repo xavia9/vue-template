@@ -7,6 +7,7 @@ import {
   Tag,
   Switch,
   Tooltip,
+  DatePicker,
 } from 'element-ui';
 
 Vue.use(Table)
@@ -15,4 +16,5 @@ Vue.use(Table)
   .use(Pagination)
   .use(Tag)
   .use(Switch)
-  .use(Tooltip);
+  .use(Tooltip)
+  .use(DatePicker);

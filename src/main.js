@@ -12,8 +12,9 @@ Vue.config.productionTip = false;
 // console.log(App);
 
 new Vue({
+  el: '#app',
   router,
   store,
   // 直接传入组件对象 App.vue里面的template会替换index.html里面#app的内容
   render: (h) => h(App),
-}).$mount('#app');
+});

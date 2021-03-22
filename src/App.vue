@@ -28,6 +28,7 @@
         <el-button v-else>已下架</el-button>
       </template>
       <!-- 具名插槽 -->
+      <!-- v-model的值不能为数字 -->
       <template #status="{ slotData }">
         <el-switch
           v-model="slotData.status"

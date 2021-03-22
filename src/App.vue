@@ -60,9 +60,9 @@ export default {
         },
         {
           label: "操作",
-          value: "handel",
+          value: "type",
           slotname: "handel",
-          handelType: "type",
+          // handelType: "type",
         },
       ],
       tableData: [

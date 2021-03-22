@@ -51,11 +51,10 @@ export default {
         { label: "日期", value: "date", sortable: true },
         { label: "姓名", value: "name", sortable: true },
         { label: "地址", value: "address", sortable: true },
-        // { label: "禁启用状态", value: "", slotname: "statusName" },
         {
           label: "禁启用状态",
           value: "status",
-          // 用于判断
+          // slotname用于判断是否渲染为插槽
           slotname: "status",
         },
         {
@@ -68,7 +67,7 @@ export default {
       tableData: [
         {
           date: "2016-05-02",
-          name: "王小虎",
+          name: "王小虎A",
           address: "上海市普陀区金沙江路 1518 弄",
           status: true,
           type: 0,
@@ -76,21 +75,21 @@ export default {
         },
         {
           date: "2016-05-04",
-          name: "王小虎",
+          name: "王小虎B",
           address: "上海市普陀区金沙江路 1517 弄",
           status: false,
           type: 1,
         },
         {
           date: "2016-05-01",
-          name: "王小虎",
+          name: "王小虎C",
           address: "上海市普陀区金沙江路 1519 弄",
           status: true,
           type: 1,
         },
         {
           date: "2016-05-03",
-          name: "王小虎",
+          name: "王小虎D",
           address: "上海市普陀区金沙江路 1516 弄",
           status: true,
           type: 0,

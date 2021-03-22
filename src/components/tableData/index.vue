@@ -44,12 +44,12 @@
             <!-- <template> -->
             <!-- <slot>默认内容</slot> -->
             <!-- </template> -->
-            <!-- 作用域插槽 -->
             <template slot-scope="scope">
               <!-- 作用域插槽与匿名插槽必须隐藏一个 否则使用作用域插槽 父级组件中无法正常取值 -->
               <!-- <slot v-if="item.slotname == 'status'" :name="item.slotname">
                 {{ item.slotname }}
               </slot> -->
+              <!-- 作用域插槽 -->
               <slot
                 v-if="item.slotname"
                 :name="item.slotname"
@@ -57,13 +57,13 @@
               >
                 {{ item.slotname }}
               </slot>
-              <!-- 普通文本渲染 -->
+              <!-- 普通文本渲染改进 -->
               <div v-else>
                 <span>{{ scope.row[item.value] }}</span>
               </div>
             </template>
           </el-table-column>
-          <!-- 文本数据渲染 -->
+          <!-- 普通文本数据渲染 -->
           <!-- <el-table-column
             v-else
             :key="item.value"

@@ -13,7 +13,7 @@
 </template>
 <script>
 export default {
-  name: "PublicTimePicker",
+  name: "DatePicker",
   data() {
     return {
       time: this.$attrs.dateTime || "",

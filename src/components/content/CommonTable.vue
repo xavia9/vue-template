@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div class="common-table flex-column">
     <!-- <el-button type="success" icon="el-icon-refresh-right" size="mini"
       >重置测试</el-button
     > -->
-    <div class="PublicTable">
+    <div class="flex1" id="table-area">
       <!-- 主题el-table一些设置表头可根据情况添加 -->
       <el-table
+        v-if="tableHeight !== 0"
         :data="tableData"
-        border
         stripe
         :header-cell-style="{ background: '#f8fbff' }"
         @selection-change="handleSelectionChange"
@@ -30,7 +30,7 @@
           :label="configFlag.indexName || '序号'"
         />
         <!-- 循环遍历表头展示数据 -->
-        <template v-for="item in tableTitleData">
+        <template v-for="item in tableHeadList">
           <el-table-column
             :key="item.value"
             :label="item.label"
@@ -81,7 +81,6 @@
       <!-- layout表示需要显示哪几项功能 total总页数 sizes用户选择每页显示多少条 prev上一页 pager分页 next下一页 jumper跳转至指定页 page-size每页显示几条数据 page-sizes用户选择每页显示几条数据(默认显示一条) -->
       <!-- @current-change 当前页改变时触发 @size-chang (pagesize改变时触发)-->
       <el-pagination
-        class="fr"
         layout="total, sizes, prev, pager, next, jumper"
         v-if="configFlag.needPage"
         :current-page.sync="pageValue.pageNum"
@@ -96,12 +95,14 @@
 </template>
 <script>
 export default {
-  name: "PublicTable",
+  name: 'CommonTable',
   data() {
-    return {};
+    return {
+      tableHeight: 0,
+    }
   },
   props: {
-    tableTitleData: {
+    tableHeadList: {
       // 表头数据  文案和绑定值，以及需要特殊处理的slot
       type: Array,
       default: () => [],
@@ -118,7 +119,7 @@ export default {
           pageNum: 1,
           pageSize: 1,
           total: 1,
-        };
+        }
       },
     },
     configFlag: {
@@ -130,30 +131,43 @@ export default {
           selection: false, // 是否需要单选多选框
           index: false, // 是否需要序号
           // 这里不全面，可根据实际情况添加
-        };
+        }
       },
     },
-    tableHeight: {
-      // 可以监听屏幕高度获取。
-      // 高度
-      type: Number,
-      default: () => null,
-    },
+    // tableHeight: {
+    //   // 可以监听屏幕高度获取。
+    //   // 高度
+    //   type: Number,
+    //   default: () => null,
+    // },
+  },
+  mounted() {
+    this.initTableHeight()
   },
   methods: {
+    initTableHeight() {
+      let rec = document.getElementById('table-area').getBoundingClientRect()
+      // 减去分页器的高度
+      this.tableHeight = rec.height - 32
+    },
     // 发送自定义事件给父元素
     // 每页条数
     sizeChange(val) {
-      this.$emit("pageSizeChange", { pageSize: val });
+      this.$emit('pageSizeChange', { pageSize: val })
     },
     // 当前页
     currentChange(val) {
-      this.$emit("currentPageChange", { pageNum: val });
+      this.$emit('currentPageChange', { pageNum: val })
     },
     // 多选
     handleSelectionChange(val) {
-      this.$emit("handleSelectionChange", val);
+      this.$emit('handleSelectionChange', val)
     },
   },
-};
+}
 </script>
+<style>
+.common-table {
+  height: 100%;
+}
+</style>

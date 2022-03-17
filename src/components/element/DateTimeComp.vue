@@ -21,15 +21,15 @@
 </template>
 <script>
 export default {
-  name: "DateTimePicker",
+  name: 'DateTimeComp',
   props: {
     start_date: {
       type: String,
-      default: "",
+      default: '',
     },
     end_date: {
       type: String,
-      default: "",
+      default: '',
     },
     // index: {
     //   type: Number,
@@ -38,12 +38,12 @@ export default {
     config: {
       type: Object,
       default: () => {
-        return {};
+        return {}
       },
     },
   },
   mounted() {
-    this.dateRange = [this.start_date, this.end_date];
+    this.dateRange = [this.start_date, this.end_date]
   },
   data() {
     return {
@@ -52,65 +52,65 @@ export default {
       pickerOptions: {
         shortcuts: [
           {
-            text: "最近三天",
+            text: '最近三天',
             onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start - 3600 * 1000 * 24 * 3);
-              picker.$emit("pick", [start, end]);
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start - 3600 * 1000 * 24 * 3)
+              picker.$emit('pick', [start, end])
             },
           },
           {
-            text: "最近五天",
+            text: '最近五天',
             onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start - 3600 * 1000 * 24 * 5);
-              picker.$emit("pick", [start, end]);
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start - 3600 * 1000 * 24 * 5)
+              picker.$emit('pick', [start, end])
             },
           },
           {
-            text: "最近一周",
+            text: '最近一周',
             onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit("pick", [start, end]);
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+              picker.$emit('pick', [start, end])
             },
           },
           {
-            text: "最近一个月",
+            text: '最近一个月',
             onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-              picker.$emit("pick", [start, end]);
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+              picker.$emit('pick', [start, end])
             },
           },
           {
-            text: "最近三个月",
+            text: '最近三个月',
             onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-              picker.$emit("pick", [start, end]);
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
+              picker.$emit('pick', [start, end])
             },
           },
         ],
       },
-    };
+    }
   },
   methods: {
     setDate(val) {
-      var selectedtime = {};
-      selectedtime.datetime = val;
+      var selectedtime = {}
+      selectedtime.datetime = val
       // selectedtime.index = this.index;
-      console.log(selectedtime);
+      console.log(selectedtime)
       //   var ccc = new Date(selectedtime.datetime[0]);
       //   console.log(+ccc.getMonth() + 1);
       //   console.log(ccc.getDate());
-      this.$emit("datetimeselected", selectedtime);
+      this.$emit('datetimeselected', selectedtime)
     },
   },
-};
+}
 </script>

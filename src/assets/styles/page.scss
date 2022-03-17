@@ -1,0 +1,58 @@
+/* 全局公共样式 */
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.flex1 {
+  flex: 1;
+}
+.flex-area {
+  flex: 1;
+  overflow-y: auto;
+}
+/* 高度宽度 */
+.h100vh {
+  height: 100vh;
+}
+.h100 {
+  height: 100%;
+}
+/* 颜色 */
+.bgc-f8f8fb {
+  background-color: #f8f8fb;
+}
+.bgc-fff {
+  background-color: #fff;
+}
+/*elementUI*/
+// .el-container {
+//   height: 100%;
+// }
+// .el-menu.el-menu--horizontal {
+//   height: 46px;
+//   line-height: 46px;
+// }
+// .el-menu--horizontal > .el-menu-item {
+//   height: 46px;
+//   line-height: 46px;
+// }
+// .el-menu-item {
+//   font-size: 14px;
+//   padding: 0 8px;
+// }
+.el-menu--horizontal > .el-menu-item {
+  height: 46px;
+  line-height: 46px;
+}
+.el-menu {
+  border: none;
+}
+.el-menu.el-menu--horizontal {
+  border: none;
+}
+.el-container {
+  // background-color: #f8f8fb;
+}
+.el-main {
+  background-color: #f8f8fb;
+}

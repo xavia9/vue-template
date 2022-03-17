@@ -1,17 +1,15 @@
 <template>
-  <div>
-    <tags-view :menuTop="menuTop" :menuList="menuList"></tags-view>
+  <div class="js-page">
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'home',
+  name: 'jsPage',
   components: {},
   data() {
-    return {
-      menuTop: [],
-    }
+    return {}
   },
   props: {},
   created() {},

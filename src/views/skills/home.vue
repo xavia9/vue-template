@@ -1,19 +1,17 @@
 <template>
   <div>
-    <tags-view :menuTop="menuTop" :menuList="menuList"></tags-view>
+    Home页面
   </div>
 </template>
 
 <script>
 export default {
-  name: 'home',
-  components: {},
+  name: 'Home',
   data() {
-    return {
-      menuTop: [],
-    }
+    return {}
   },
   props: {},
+  components: {},
   created() {},
   mounted() {},
   methods: {},

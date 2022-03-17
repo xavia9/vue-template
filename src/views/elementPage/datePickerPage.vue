@@ -1,18 +1,18 @@
 <template>
   <div>
     时间组件
-    <DatePicker
+    <date-picker
       @changeDateTime="changeEventStartTime"
       :dateTime="eventStartTime"
       ref="eventStartTime"
-    ></DatePicker>
+    ></date-picker>
   </div>
 </template>
 <script>
-import DatePicker from "../components/DatePicker.vue";
+import DatePicker from "@/components/element/DatePicker.vue";
 
 export default {
-  name: "timePicker",
+  name: "timepicker",
   components: { DatePicker },
   data() {
     return { eventStartTime: null };

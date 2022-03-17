@@ -1,20 +1,15 @@
 <template>
-  <div>
-    <tags-view :menuTop="menuTop" :menuList="menuList"></tags-view>
-  </div>
+  <div>testComp2</div>
 </template>
 
 <script>
 export default {
-  name: 'home',
+  name: 'testComp2',
   components: {},
   data() {
-    return {
-      menuTop: [],
-    }
+    return {}
   },
   props: {},
-  created() {},
   mounted() {},
   methods: {},
 }

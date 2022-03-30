@@ -1,0 +1,8 @@
+查看所有安装包：npm list -g --depth 0
+查看镜像源：nrm ls
+切换镜像源：nrm use cnpm/nrm use taobao
+
+查看
+netstat -ano
+具体端口号
+netstat -ano|findstr "8080"

@@ -1,4 +1,26 @@
+div,
+p,
+section {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #eaecf1;
+  border-radius: 3px;
+}
+
+// $deep: '>>>';
 /* 全局公共样式 */
+.flex-row {
+  display: flex;
+}
 .flex-column {
   display: flex;
   flex-direction: column;
@@ -40,9 +62,17 @@
 //   font-size: 14px;
 //   padding: 0 8px;
 // }
+.el-menu-item.is-active {
+  color: #447aff;
+}
+.el-menu--horizontal > .el-menu-item.is-active {
+  color: #447aff;
+  border: none;
+}
 .el-menu--horizontal > .el-menu-item {
   height: 46px;
   line-height: 46px;
+  border: none;
 }
 .el-menu {
   border: none;
@@ -55,4 +85,33 @@
 }
 .el-main {
   background-color: #f8f8fb;
+}
+.is-multiple.el-select-dropdown {
+  // display: none;
+}
+.el-dialog__body {
+  padding: 0 32px;
+}
+
+.el-table th.el-table__cell {
+  color: rgba(0, 0, 0, 0.8);
+  text-align: left;
+  background-color: #f1f1f8;
+}
+.el-button--primary {
+  color: #fff;
+  background-color: #447aff;
+  border-color: #447aff;
+}
+.el-pager li.active {
+  color: #447aff;
+}
+.padl8 {
+  padding-left: 8px;
+}
+.margl8 {
+  margin-left: 8px;
+}
+.margr8 {
+  margin-right: 8px;
 }

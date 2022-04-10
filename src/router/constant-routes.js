@@ -1,27 +1,42 @@
 import constantMoreRoutes from './constant-more-routes.js'
 
 import page404 from '@/views/common/error-page/404'
+import login from '@/views/login'
 
-let constantRoutes = [
+let initialRoutes = [
+  {
+    path: '/',
+    redirect: '/asyncPage',
+  },
+  {
+    path: '/login',
+    name: 'login',
+    // component: () => import('@/views/common/error-page/404'),
+    component: login,
+    hidden: false,
+    meta: {
+      showSideBar: false,
+    },
+  },
   {
     path: '/404',
     name: 'page404',
     // component: () => import('@/views/common/error-page/404'),
     component: page404,
-    hidden: true,
-  },
-  {
-    path: '/',
-    redirect: '/asyncPage',
-    name: 'asyncPage',
+    hidden: false,
+    meta: {
+      showSideBar: false,
+    },
   },
   // {
-  //   path: '/bar-line',
-  //   name: 'barLine',
-  //   component: () => import('@/views/echart/bar-line.vue'),
-  //   // component: barLine,
+  //   path: '/:pathMatch(.*)',
+  //   redirect: '/404',
   // },
+  {
+    path: '*',
+    redirect: '/404',
+  },
 ]
-let resultRoutes = [...constantRoutes, ...constantMoreRoutes]
+let constantRoutes = [...initialRoutes, ...constantMoreRoutes]
 
-export default resultRoutes
+export default constantRoutes

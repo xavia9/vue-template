@@ -3,7 +3,8 @@ import Vue from 'vue'
 // 1.导入路由对象
 import VueRouter from 'vue-router'
 // import constantMoreRoutes from './constant-more-routes.js'
-import routes from './constant-routes.js'
+import constantRoutes from './constant-routes.js'
+import store from '@/store/index'
 
 // import tableData from '../views/element/tabledata.vue'
 // import dateTimePicker from '../views/element/datetimepicker.vue'
@@ -77,11 +78,20 @@ Vue.use(VueRouter)
 
 // 4.创建router实例
 const router = new VueRouter({
-  routes,
+  routes: constantRoutes, //属性名必须为routes
 })
 // const router = new VueRouter({
 //   constantRoutes,
 // })
-// console.log(router)
+// 合并路由
+const dynamicRoutes = store.state.dynamicRoutes
+// 静态路由 + 动态路由 合并 完整路由
+const allRoutes = constantRoutes.concat(dynamicRoutes)
+// 向router对象中添加路由
+router.options.routes = allRoutes
+dynamicRoutes.forEach((route) => {
+  router.addRoute(route)
+})
+
 // 5.导出router实例
 export default router

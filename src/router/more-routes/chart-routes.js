@@ -44,6 +44,18 @@ const routes = [
           icon: 'el-icon-data-line',
         },
       },
+      {
+        path: 'antv-page',
+        name: 'antv',
+        component: () =>
+          import(
+            /* webpackChunkName: "echart_component_encapsulation" */ '@/views/echartPage/antv-page.vue'
+          ),
+        meta: {
+          name: 'antv使用',
+          icon: 'el-icon-data-analysis',
+        },
+      },
     ],
   },
 ]

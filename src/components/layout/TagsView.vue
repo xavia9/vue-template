@@ -5,16 +5,12 @@
       <!-- 顶部菜单 -->
       <nav-top :menuTop="menuTop"></nav-top>
       <!-- </el-header> -->
-      <el-container class="flex-area">
-        <el-aside width="200px" v-show="showSideBar">
-          <side-bar :menuList="menuList"></side-bar>
-        </el-aside>
-        <el-main class="h100 flex-column">
-          <div class="flex-area bgc-fff">
-            <router-view />
-          </div>
-        </el-main>
-      </el-container>
+      <el-main class="h100 flex-row">
+        <side-bar :menuList="menuList" v-show="showSideBar"></side-bar>
+        <div class="flex-area bgc-fff">
+          <router-view />
+        </div>
+      </el-main>
     </el-container>
   </div>
 </template>
@@ -55,6 +51,7 @@ export default {
     return {
       showSideBar: false,
       menuList: [],
+      menuMap: {}, //菜单映射表
     }
   },
   props: {
@@ -70,45 +67,67 @@ export default {
   watch: {
     '$route.path': {
       handler(newVal, oldval) {
-        this.activeMenuItem = this.$route.path
-        this.generateMenu()
+        // this.activeMenuItem = this.$route.path
+        this.generateMenuMap()
+        // 1.侧边栏是否显示
         this.showSidebar()
+        // 2.生成侧边栏
+        if (this.showSideBar) {
+          this.generateSideMenu()
+        }
       },
       deep: true,
     },
   },
   created() {
     this.menuTop = menuTop
-    this.generateMenu()
+    // this.generateSideMenu()
   },
   mounted() {},
   methods: {
-    // 处理侧边栏菜单
-    handleMenu(firstRoutePath) {
-      const routeList = this.$router.options.routes.find(
-        (route) => route.path === firstRoutePath
-      )
-      const menuList = routeList.children
+    generateRouteName() {},
+    // 生成印射菜单
+    generateMenuMap() {
+      this.$router.options.routes.forEach((route) => {
+        this.menuMap = {
+          ...this.menuMap,
+          [route.name]: route.children, //key:顶部菜单 value:侧边菜单
+        }
+      })
+    },
+    // 生成侧边菜单
+    generateSideMenu() {
+      const routeName = this.$route.matched[0].name
+      // const routeList = this.$router.options.routes.find(
+      //   (route) => route.name === routeName
+      // )
+      // 子节点
+      const menuList = this.menuMap[routeName]
+      // 子节点没数据 侧边栏不必生成
+      if (this.$isLengthZero(menuList)) return
+      // const menuList = routeList.children
+      // 侧边菜单
       this.menuList = menuList.map((item) => {
         return {
-          routePath: `${firstRoutePath}/${item.path}`,
+          routePath: `/${routeName}/${item.path}`,
           name: item.meta.name,
           icon: item.meta.icon,
         }
       })
     },
-    // 生成不同的菜单
-    generateMenu() {
-      console.log()
-      if (this.$route.path === '/elementPage/dialogPage') {
-        this.handleMenu('/elementPage')
-      } else if (this.$route.path === '/echartPage/single-bar') {
-        this.handleMenu('/echartPage')
-      }
-    },
+    // 侧边菜单是否显示
     showSidebar() {
-      const arr = ['elementPage', 'echartPage']
-      this.showSideBar = arr.includes(this.$route.matched[0].name)
+      const matched = this.$route.matched
+      // console.log(matched)
+      if (matched.length <= 1) {
+        this.showSideBar = false
+      } else {
+        this.showSideBar = true
+      }
+      // 子节点没数据 侧边栏不显示
+      // const routeName = matched[0].name
+      // const menuList = this.menuMap[routeName]
+      // this.showSideBar = !this.$isLengthZero(menuList)
     },
   },
 }

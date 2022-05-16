@@ -42,6 +42,18 @@ const routes = [
         },
       },
       {
+        path: 'tableRowSpan',
+        name: 'tableRowSpan',
+        component: () =>
+          import(
+            /* webpackChunkName: "table_component_encapsulation" */ '@/views/elementPage/tableRowSpan.vue'
+          ),
+        meta: {
+          name: '合并单元格',
+          icon: 'el-icon-document',
+        },
+      },
+      {
         path: 'tableScope',
         name: 'tableScope',
         component: () =>
@@ -99,6 +111,18 @@ const routes = [
         meta: {
           name: '下拉框分页功能组件',
           icon: 'el-icon-date',
+        },
+      },
+      {
+        path: 'carouselPage',
+        name: 'carouselPage',
+        component: () =>
+          import(
+            /* webpackChunkName: "echart_component_encapsulation" */ '@/views/elementPage/carouselPage.vue'
+          ),
+        meta: {
+          name: '轮播图',
+          icon: 'el-icon-data-analysis',
         },
       },
     ],

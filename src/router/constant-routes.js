@@ -6,7 +6,7 @@ import login from '@/views/login'
 let initialRoutes = [
   {
     path: '/',
-    redirect: '/asyncPage',
+    redirect: '/home',
   },
   {
     path: '/login',

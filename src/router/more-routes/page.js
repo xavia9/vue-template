@@ -23,6 +23,11 @@
 // }
 const routes = [
   {
+    path: '/home',
+    name: 'home',
+    component: () => import(/* webpackChunkName: "home" */ '@/views/home.vue'),
+  },
+  {
     path: '/dynamic',
     name: 'Dynamic',
     component: () =>
@@ -37,6 +42,20 @@ const routes = [
       import(
         /* webpackChunkName: "async_page" */ '@/views/skills/asyncPage.vue'
       ),
+  },
+  {
+    path: '/swiperPage',
+    name: 'swiperPage',
+    component: () =>
+      import(
+        /* webpackChunkName: "async_page" */ '@/views/swiper/swiperPage.vue'
+      ),
+  },
+  {
+    path: '/decisionFlow',
+    name: 'decisionFlow',
+    component: () =>
+      import(/* webpackChunkName: "async_page" */ '@/views/decisionFlow.vue'),
   },
 ]
 // // 4.创建router实例

@@ -2,11 +2,11 @@
   <div class="dialog-form">
     <el-dialog
       :title="dialogConfig.dialogTitle"
-      :visible.sync="dialogVisible"
+      :visible.sync="dialogConfig.dialogVisible"
       :before-close="closeAndReset"
     >
       <el-form :model="dialogForm" ref="dialogForm">
-        <el-row :gutter="50" v-for="formItem in formList" :key="formItem.prop">
+        <el-row :gutter="50" v-for="formItem in fieldList" :key="formItem.prop">
           <el-col :span="formItem.colNum">
             <!-- <el-form-item
             v-for="formItem in formList"
@@ -28,12 +28,14 @@
                 v-model="dialogForm[formItem.prop]"
                 :placeholder="formItem.placeholder"
                 autocomplete="off"
+                size="small"
               ></el-input>
               <!-- 下拉框 -->
               <el-select
                 v-if="formItem.type === 'select'"
                 v-model="dialogForm[formItem.prop]"
                 :placeholder="formItem.placeholder"
+                size="small"
               >
                 <el-option
                   v-for="item in formItem['selectOptions']"
@@ -42,13 +44,28 @@
                   :key="item.value"
                 ></el-option>
               </el-select>
+              <!-- 多标签输入框 -->
+              <multi-tags
+                v-if="formItem.type === 'multiTags'"
+                :inputValue="dialogForm[formItem.prop]"
+                :placeholder="formItem.placeholder"
+                @emitParent="emitParent"
+              />
               <!-- 文本框 -->
               <el-input
                 v-if="formItem.type === 'textarea'"
                 type="textarea"
                 v-model="dialogForm[formItem.prop]"
                 :placeholder="formItem.placeholder"
+                size="small"
               ></el-input>
+              <!-- 作用域插槽 -->
+              <slot
+                v-else-if="formItem.type === 'namedSlot'"
+                :name="formItem.slotName"
+              >
+                {{ formItem.slotName }}
+              </slot>
             </el-form-item>
           </el-col>
         </el-row>
@@ -66,13 +83,21 @@
 </template>
 
 <script>
+import MultiTags from '@/components/element/MultiTags.vue'
 export default {
   name: 'dialogForm',
+  components: {
+    MultiTags,
+    // MultiTags: () =>
+    //   import(
+    //     /* webpackChunkName: "common_form_component" */ '@/components/element/MultiTags.vue'
+    //   ),
+  },
   data() {
     return {
-      dialogVisible: false,
-      url: '',
-      formLabelWidth: '140px',
+      // dialogVisible: false,
+      // url: '',
+      formLabelWidth: '180px',
     }
   },
   props: {
@@ -89,9 +114,14 @@ export default {
       type: Object,
       required: true,
     },
-    formList: {
+    fieldList: {
       type: Array,
       required: true,
+    },
+    value: {
+      type: Array,
+      require: true,
+      default: () => [],
     },
   },
   watch: {
@@ -145,20 +175,23 @@ export default {
       })
     },
     // 重置表单
-    resetForm() {
-      this.$refs.dialogForm.resetFields()
-    },
+    // resetForm() {
+    //   this.$refs.dialogForm.resetFields()
+    // },
+    // 点击取消/关闭按钮
     closeAndReset() {
+      // 1.清空表单
       this.$refs.dialogForm.resetFields()
+      // 2.父组件关闭对话框
       this.$emit('closeDialog')
     },
-    confirm() {
-      // this.submitForm()
-    },
-    beforeClose(done) {
-      this.$refs.dialogForm.resetFields()
-      done()
-    },
+    // confirm() {
+    //   // this.submitForm()
+    // },
+    // beforeClose(done) {
+    //   this.$refs.dialogForm.resetFields()
+    //   done()
+    // },
     // 计算总行数
     totalRow() {},
     // resetForm(uploadArr) {
@@ -171,6 +204,9 @@ export default {
     //     }
     //   }
     // }
+    emitParent(tags) {
+      this.$emit('tagInput', tags)
+    },
   },
 }
 </script>

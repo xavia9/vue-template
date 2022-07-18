@@ -15,7 +15,6 @@
     <!-- 按钮上传 -->
     <el-upload
       action
-      drag
       :auto-upload="false"
       :show-file-list="false"
       :on-change="handleChange"
@@ -45,7 +44,7 @@ import SparkMD5 from 'spark-md5'
 // import axios from 'axios'
 
 export default {
-  name: 'MultipartUpload',
+  name: 'uploadFragment',
   // filters: {
   //   btnTextFilter(val) {
   //     return val ? '暂停' : '继续'
@@ -93,7 +92,7 @@ export default {
     // 生成chunk
     generateChunk(fileObj) {
       // 将文件按固定大小（2M）进行切片，注意此处同时声明了多个常量
-      const chunkSize = 2097152,
+      const chunkSize = 2097152, // 1024*1024
         // 计算切片总数
         chunkListLength = Math.ceil(fileObj.size / chunkSize),
         // 文件后缀名

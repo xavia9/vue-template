@@ -6,7 +6,7 @@ import axios from 'axios'
 import { Message, Loading } from 'element-ui'
 
 let ajaxCount = 0
-const configCodes = {
+const codeConfig = {
   success: '0000',
   failure: '9999',
   repetiton: '7777',
@@ -57,21 +57,25 @@ const mockInterceptors = (res) => {
     return Promise.reject(res)
   }
 }
-const onlineInterceptors = () => {
+// 在线调试需要根据后端的code处理对应的逻辑
+const devInterceptors = (res) => {
   const { code, msg } = res.data
   ajaxCount--
   if (!ajaxCount) {
   }
-  if (code === configCodes.notLogin) {
+  if (code === codeConfig.notLogin) {
     Message.error(msg)
-    setTimeout(() => {
-      window.location.href = '/#/login'
-    }, 1000)
-  } else if (code === configCodes.success) {
+    // 退出登录
+    store.dispatch('loginOut').then(() => {
+      setTimeout(() => {
+        window.location.href = '/#/login'
+      }, 1000)
+    })
+  } else if (code === codeConfig.success) {
     return res.data
-  } else if (code === configCodes.failure) {
+  } else if (code === codeConfig.failure) {
     Message.error(msg)
-  } else if (code === configCodes.repetiton) {
+  } else if (code === codeConfig.repetiton) {
     Message.warning(msg)
     return res.data
   } else if (res.config.responseType === 'blob') {
@@ -83,9 +87,10 @@ instance.interceptors.response.use(
   (res) => {
     if (process.env.VUE_APP_MOCK_ENABLE === 'true') {
       return mockInterceptors(res)
-    } else if (['production', 'development'].includes(process.env.NODE_ENV)) {
-      return onlineInterceptors(res)
     }
+    // else if (['production', 'development'].includes(process.env.NODE_ENV)) {
+    return devInterceptors(res)
+    // }
   },
   (error) => {
     ajaxCount--

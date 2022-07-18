@@ -20,12 +20,12 @@
 
 <script>
 export default {
-  name: 'NavTop',
+  name: "NavTop",
   components: {},
   data() {
     return {
-      activeTopMenuItem: '/asyncPage',
-    }
+      activeTopMenuItem: "/home",
+    };
   },
   props: {
     menuTop: {
@@ -34,16 +34,16 @@ export default {
     },
   },
   watch: {
-    '$route.path': {
+    "$route.path": {
       handler(newVal, oldval) {
-        this.activeTopMenuItem = this.$route.path
+        this.activeTopMenuItem = this.$route.path;
         // console.log(this.activeTopMenuItem)
       },
       deep: true,
     },
   },
   created() {
-    this.activeTopMenuItem = this.$route.path
+    this.activeTopMenuItem = this.$route.path;
     // console.log(this.activeTopMenuItem)
     // console.log(this.menuTop)
   },
@@ -51,15 +51,17 @@ export default {
   methods: {
     // 选择顶部菜单
     selectTopMenu(routePath) {
-      if (routePath === this.$route.path) return
-      this.$router.push(routePath)
+      console.log(routePath);
+      if (routePath === this.$route.path) return;
+      this.$router.push(routePath);
     },
   },
-}
+};
 </script>
 
 <style>
 .nav-top {
+  width: 100%;
   /* height: 100%; */
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="tags-view h100vh">
+  <div class="tags-view h100">
     <el-container class="h100 flex-column">
       <!-- <el-header> -->
       <!-- 顶部菜单 -->
@@ -7,7 +7,7 @@
       <!-- </el-header> -->
       <el-main class="h100 flex-row">
         <side-bar :menuList="menuList" v-show="showSideBar"></side-bar>
-        <div class="flex-area bgc-fff">
+        <div class="flex1 bgc-fff">
           <router-view />
         </div>
       </el-main>
@@ -18,31 +18,39 @@
 <script>
 const menuTop = [
   {
-    routePath: '/asyncPage',
-    name: '异步组件',
+    routePath: "/home",
+    name: "首页",
   },
   {
-    routePath: '/dynamic',
-    name: '动态组件',
+    routePath: "/asyncPage",
+    name: "异步组件",
   },
   {
-    routePath: '/jsPage/mousemove',
-    name: 'js相关',
+    routePath: "/dynamic",
+    name: "动态组件",
   },
   {
-    routePath: '/elementPage/dialogPage',
-    name: 'element组件封装',
+    routePath: "/jsPage/mousemove",
+    name: "js相关",
   },
   {
-    routePath: '/echartPage/single-bar',
-    name: 'echart组件封装',
+    routePath: "/elementPage/dialogPage",
+    name: "element组件封装",
   },
-]
-import NavTop from 'components/layout/NavTop.vue'
-import SideBar from 'components/layout/SideBar.vue'
+  {
+    routePath: "/echartPage/single-bar",
+    name: "echart组件封装",
+  },
+  {
+    routePath: "/decisionFlow",
+    name: "决策流",
+  },
+];
+import NavTop from "components/layout/NavTop.vue";
+import SideBar from "components/layout/SideBar.vue";
 
 export default {
-  name: 'TagsView',
+  name: "TagsView",
   components: {
     NavTop,
     SideBar,
@@ -52,7 +60,7 @@ export default {
       showSideBar: false,
       menuList: [],
       menuMap: {}, //菜单映射表
-    }
+    };
   },
   props: {
     // menuTop: {
@@ -65,22 +73,22 @@ export default {
     // },
   },
   watch: {
-    '$route.path': {
+    "$route.path": {
       handler(newVal, oldval) {
         // this.activeMenuItem = this.$route.path
-        this.generateMenuMap()
+        this.generateMenuMap();
         // 1.侧边栏是否显示
-        this.showSidebar()
+        this.showSidebar();
         // 2.生成侧边栏
         if (this.showSideBar) {
-          this.generateSideMenu()
+          this.generateSideMenu();
         }
       },
       deep: true,
     },
   },
   created() {
-    this.menuTop = menuTop
+    this.menuTop = menuTop;
     // this.generateSideMenu()
   },
   mounted() {},
@@ -92,19 +100,19 @@ export default {
         this.menuMap = {
           ...this.menuMap,
           [route.name]: route.children, //key:顶部菜单 value:侧边菜单
-        }
-      })
+        };
+      });
     },
     // 生成侧边菜单
     generateSideMenu() {
-      const routeName = this.$route.matched[0].name
+      const routeName = this.$route.matched[0].name;
       // const routeList = this.$router.options.routes.find(
       //   (route) => route.name === routeName
       // )
       // 子节点
-      const menuList = this.menuMap[routeName]
+      const menuList = this.menuMap[routeName];
       // 子节点没数据 侧边栏不必生成
-      if (this.$isLengthZero(menuList)) return
+      if (this.$isLengthZero(menuList)) return;
       // const menuList = routeList.children
       // 侧边菜单
       this.menuList = menuList.map((item) => {
@@ -112,17 +120,17 @@ export default {
           routePath: `/${routeName}/${item.path}`,
           name: item.meta.name,
           icon: item.meta.icon,
-        }
-      })
+        };
+      });
     },
     // 侧边菜单是否显示
     showSidebar() {
-      const matched = this.$route.matched
+      const matched = this.$route.matched;
       // console.log(matched)
       if (matched.length <= 1) {
-        this.showSideBar = false
+        this.showSideBar = false;
       } else {
-        this.showSideBar = true
+        this.showSideBar = true;
       }
       // 子节点没数据 侧边栏不显示
       // const routeName = matched[0].name
@@ -130,7 +138,7 @@ export default {
       // this.showSideBar = !this.$isLengthZero(menuList)
     },
   },
-}
+};
 </script>
 
 <style>

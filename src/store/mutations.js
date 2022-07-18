@@ -3,9 +3,10 @@ import router from '@/router/index'
 import constantRoutes from '@/router/constant-routes.js'
 
 const mutations = {
-  // [SET_MENUID](state, menuId) {
-  //   state.menuId = menuId;
-  // },
+  setToken(state, token) {
+    state.token = token
+    window.sessionStorage.setItem('token', token)
+  },
   setMenuId(state, menuId) {
     state.menuId = menuId
   },
@@ -14,6 +15,7 @@ const mutations = {
   },
   setPackageId(state, packageId) {
     state.packageId = packageId
+    window.sessionStorage.setItem('packageId', packageId)
   },
   setPackageCode(state, packageCode) {
     state.packageCode = packageCode

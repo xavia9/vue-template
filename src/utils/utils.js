@@ -43,17 +43,21 @@ export function genarateRoutes(data, menuList) {
  *@return {}
  */
 function getQueryObject(url) {
+  // const obj1 = new URLSearchParams("?companyId=32&storeId=3129");
+  // console.log(obj1.get("companyId")); //32
+
+  // url为http://www.baidu.com?name=1
   url = url == null ? window.location.href : url
   const search = url.substring(url.lastIndexOf('?') + 1)
   // console.log(search)
   const obj = {}
   const reg = /([^?&=]+)=([^?&=]*)/g
   search.replace(reg, (rs, $1, $2) => {
-    console.log(rs, $1, $2)
+    // console.log(rs, $1, $2) // name=1 name 1
     const name = decodeURIComponent($1)
     let val = decodeURIComponent($2)
-    val = String(val)
-    obj[name] = val
+    // val = String(val)
+    obj[name] = String(val)
     return rs
   })
   return obj
@@ -131,8 +135,45 @@ function formatDateTime(dateTime) {
 function isLengthZero(Arr) {
   return !Arr || Arr.length <= 0
 }
+function generateUUID() {
+  var d = new Date().getTime()
+
+  if (window.performance && typeof window.performance.now === 'function') {
+    d += window.performance.now() // use high-precision timer if available
+    // performance.now()精确点高，不依靠系统时间，但是兼容性有问题。
+    // Date.now()会受系统时间影响，且以Unix时间为基准，不易看懂，无兼容性问题。
+  }
+  var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
+    /[x,y]/g,
+    function (c) {
+      var r = (d + Math.random() * 16) % 16 | 0
+      d = Math.floor(d / 16)
+      return (c == 'x' ? r : (r & 0x3) | 0x8).toString(16)
+    }
+  )
+  return uuid
+}
+const animateCSS = (element, animation, prefix = 'animate__') =>
+  // We create a Promise and return it
+  new Promise((resolve, reject) => {
+    const animationName = `${prefix}${animation}`
+    const node = document.querySelector(element)
+
+    node.classList.add(`${prefix}animated`, animationName)
+
+    // When the animation ends, we clean the classes and resolve the Promise
+    function handleAnimationEnd(event) {
+      event.stopPropagation()
+      node.classList.remove(`${prefix}animated`, animationName)
+      resolve('Animation ended')
+    }
+
+    node.addEventListener('animationend', handleAnimationEnd, { once: true })
+  })
 
 Vue.prototype.$getQueryObject = getQueryObject
 Vue.prototype.$downloadFile = downloadFile
 Vue.prototype.$formatDateTime = formatDateTime
 Vue.prototype.$isLengthZero = isLengthZero
+Vue.prototype.$generateUUID = generateUUID
+Vue.prototype.$animateCSS = animateCSS

@@ -1,19 +1,31 @@
 {
-  "name": "xavia-configuration",
+  "name": "rule-engin",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "mock": "vue-cli-service serve --open --mode mock",
     "build": "vue-cli-service build",
-    "build:stg": "vue-cli-service build  --mode stage"
+    "build:prd": "vue-cli-service build",
+    "build:dev": "vue-cli-service build --mode dev",
+    "build:fat001": "vue-cli-service build --mode stage",
+    "build:fat002": "vue-cli-service build --mode stage2",
+    "build:stg": "vue-cli-service build  --mode stage",
+    "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml"
   },
   "dependencies": {
+    "@antv/g6": "~3.1.3",
+    "@antv/util": "~1.3.1",
+    "@antv/x6": "^1.31.0",
+    "animate.css": "^4.1.1",
     "axios": "^0.26.1",
     "core-js": "^3.6.5",
-    "element-ui": "^2.15.1",
+    "element-ui": "^2.15.7",
     "jsencrypt": "^3.2.1",
+    "nprogress": "^0.2.0",
     "spark-md5": "^3.0.2",
+    "swiper": "^5.4.5",
+    "velocity-animate": "^1.5.2",
     "vue": "^2.6.11",
     "vue-router": "^3.5.3",
     "vuex": "^3.4.0"
@@ -25,9 +37,15 @@
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "babel-plugin-component": "^1.1.1",
+    "mockjs": "^1.1.0",
+    "numericjs": "^1.2.6",
     "postcss-px-to-viewport": "^1.1.1",
+    "postcss-pxtorem": "^5.1.1",
+    "postcss-style-px-to-viewport": "^2.9.1",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
+    "svgo": "^2.8.0",
+    "tailwindcss": "^3.1.6",
     "vue-template-compiler": "^2.6.11"
   }
 }

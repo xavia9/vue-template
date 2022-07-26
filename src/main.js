@@ -21,6 +21,10 @@ import './config/index.js'
 // 自适应
 import '@/utils/rem.js'
 
+// import VueAwesomeSwiper from 'vue-awesome-swiper'
+// import 'swiper/dist/css/swiper.css'
+// Vue.use(VueAwesomeSwiper)
+
 Vue.config.productionTip = false
 // 全局注册
 Vue.prototype.$request = axios

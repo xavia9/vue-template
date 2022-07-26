@@ -1,21 +1,22 @@
 <template>
-  <div class="js-page">
+  <div class="js-page h100">
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'jsPage',
+  name: "jsPage",
   components: {},
   data() {
-    return {}
+    return {};
   },
   props: {},
   created() {},
   mounted() {},
   methods: {},
-}
+};
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+</style>>
